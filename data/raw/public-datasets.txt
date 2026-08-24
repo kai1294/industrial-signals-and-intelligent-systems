@@ -1,0 +1,1 @@
+1. Machinery Fault Dataset https://www.kaggle.com/datasets/uysalserkan/fault-induction-motor-dataset
