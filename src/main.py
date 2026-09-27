@@ -1,14 +1,18 @@
 import os
 import pathlib
 import numpy as np
-from preprocessing.rotational_speed import rotational_speed
+from .preprocessing.rotational_speed import *
+from .visualization.plots import *
 def main():
     os.chdir(pathlib.Path(__file__).parent.parent.resolve())
     print(os.getcwd())
     file = 'normal/12.288.csv'
-    analyze(file)
+    file2 = 'imbalance/25g/12.288.csv'
+    analyze(file, 'Normal')
+    analyze(file2, 'Imbalance 25g')
+    plt.show()
 
-def analyze(file):
+def analyze(file, title):
     data = np.loadtxt(f'data/raw/fault-induction-motor-dataset/{file}',delimiter=',', dtype=float)
     tachometer = data[:, 0]
     underhang_a = data[:, 1]
@@ -18,7 +22,7 @@ def analyze(file):
     overhang_r = data[:, 5]
     overhang_t = data[:, 6]
     microphone = data[:, 7]
-    print(rotational_speed(tachometer))
+    plot(tachometer, underhang_a,underhang_r, underhang_t, overhang_a, overhang_r, overhang_t, microphone, 0, 20000, title)
 
 if __name__ == '__main__':
     main()
